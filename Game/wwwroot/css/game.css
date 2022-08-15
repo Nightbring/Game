@@ -1,0 +1,317 @@
+﻿body {
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+}
+
+div {
+    z-index: 1;
+}
+
+.leftMenu {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 10;
+}
+
+.miniMap {
+    background-color: black;
+    height: 230px;
+    width: 230px;
+    position: absolute;
+    border: 2px solid grey;
+    bottom: 0;
+    left: 0;
+}
+
+.MMvisionRound {
+    height: 200px;
+    width: 200px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.MMShip {
+    position: absolute;
+    background-color: darkred;
+    border-radius: 50%;
+}
+
+.MMCenter {
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    background-color: grey;
+    border-radius: 50%;
+}
+
+.userInfo {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
+}
+
+.targetInfo {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10;
+    display:none;
+}
+
+.userInfo > .portrait {
+    left: 0;
+}
+
+.targetInfo > .portrait {
+    right: 0;
+}
+
+.portrait {
+    height: 135px;
+    width: 135px;
+    border: 2px solid grey;
+    top: 0;
+    background-color: black;
+}
+
+.userInfo > .condition {
+    left: 145px;
+}
+
+.targetInfo > .condition {
+    text-align: right;
+    right: 145px;
+}
+
+.condition {
+    color: white;
+    font: 13px arial;
+    top: 0;
+    position: absolute;
+    width: 345px;
+    height: 66px;
+    background-color: dimgrey;
+    border: 2px solid grey;
+}
+
+.shieldBar {
+    height: 22px;
+    width: 100%;
+}
+
+.targetInfo > .condition > .shieldBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.shield {
+    background-color: darkgrey;
+    height: 100%;
+    width: 0;
+}
+
+.HPBar {
+    height: 22px;
+    width: 100%;
+}
+
+.targetInfo > .condition > .HPBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.HP {
+    background-color: darkred;
+    height: 100%;
+    width: 0;
+}
+
+.energyBar {
+    height: 22px;
+    width: 100%;
+}
+
+.targetInfo > .condition > .energyBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.energy {
+    background-color: darkcyan;
+    height: 100%;
+    width: 0;
+}
+
+.nameCard {
+    color: lightgray;
+    font: 13px arial;
+    position: absolute;
+    top: 71px;
+    width: 345px;
+    height: 16px;
+}
+
+.userInfo > .nameCard {
+    text-align: left;
+    left: 145px;
+}
+
+.targetInfo > .nameCard {
+    text-align: right;
+    right: 145px;
+}
+
+.wall {
+    background-image: url(/images/wall.png);
+    position: absolute;
+    background-size: contain;
+}
+
+/*Ships objects*/
+
+.ship {
+    background-size: contain;
+    position: absolute;
+}
+
+.visual {
+    position: relative;
+    overflow: visible;
+}
+
+.shipImage {
+    position: absolute;
+    z-index: 2;
+}
+
+.jetStream {
+    overflow: visible;
+    
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
+}
+
+.targetFrame {
+    height: 120%;
+    width: 120%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    background-image: url(/images/targetLock.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.9;
+}
+
+.frigate-p .shipImage {
+    background-image: url(/images/FrigateP.png);
+}
+
+.frigate-p .jetStream {
+    background-image: url(/images/jet.png);
+    width: 40px;
+    height: 90px;
+    left: -20px
+}
+
+.frigate-r .shipImage {
+    background-image: url(/images/FrigateR.png);
+}
+
+.frigate-r .jetStream {
+    background-image: url(/images/JetFR.png);
+    width: 58px;
+    height: 100px;
+    left: -30px;
+    background-position: center;
+}
+
+.cruiser-p .shipImage {
+    background-image: url(/images/CruiserP.png);
+}
+
+.cruiser-p .jetStream {
+    background-image: url(/images/jet.png);
+    width: 70px;
+    height: 150px;
+    left: -50px
+}
+
+.battleship-p .shipImage {
+    background-image: url(/images/BattleshipP.png);
+}
+
+.battleship-p .jetStream {
+    background-image: url(/images/jet.png);
+    width: 100px;
+    height: 250px;
+    left: -30px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-position: center;
+}
+
+.battleship-r .shipImage {
+    background-image: url(/images/BattleshipR.png);
+}
+
+.battleship-r .jetStream {
+    background-image: url(/images/JetBR.png);
+    width: 100px;
+    height: 250px;
+    left: -64px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-position: center;
+}
+
+/*Ammo objects*/
+
+.ammo {
+    position: absolute;
+    background-size: contain;
+}
+
+.bullet {
+    background-image: url(/images/bullet.png);
+}
+
+.missile {
+    background-image: url(/images/missile.png);
+}
+
+/*Background objects*/
+
+.bgobject {
+    position: absolute;
+    z-index: -1;
+}
+
+.star {
+    border-radius: 50%;
+    background-color: orangered;
+}
+
+.planet {
+    border-radius: 50%;
+    background-color: forestgreen;
+}
+
+.moon {
+    border-radius: 50%;
+    background-color: lightyellow;
+}
+
+/*--!--*/

@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "";    
+}
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="/js/GameClient.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/game.css" /></head>
+<body>
+    <div class="userInfo">
+        <div id="userPortrait" class="portrait"></div>
+        <div class="condition">
+            <div class="shieldBar">
+                <div class="shield" id="userShield"></div>
+            </div>
+            <div class="HPBar">
+                <div class="HP" id="userHP"></div>
+            </div>
+            <div class="energyBar">
+                <div class="energy" id="userEnergy"></div>
+            </div>
+        </div>
+        <div id="userName" class="nameCard"></div>
+    </div>
+    <div class="targetInfo">
+        <div id="targetPortrait" class="portrait"></div>
+        <div class="condition">
+            <div class="shieldBar">
+                <div class="shield" id="targetShield"></div>
+            </div>
+            <div class="HPBar">
+                <div class="HP" id="targetHP"></div>
+            </div>
+            <div class="energyBar">
+                <div class="energy" id="targetEnergy"></div>
+            </div>
+        </div>
+        <div id="targetName" class="nameCard"></div>
+    </div>
+
+    <div class="leftMenu">
+        <div class="miniMap">
+            <div id="minimap" class="MMvisionRound">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
