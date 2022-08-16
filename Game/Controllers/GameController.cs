@@ -66,7 +66,7 @@ namespace Game.Controllers
             await gameFlows[game.Id].ScheduleJob(job, trigger);
 
 
-            BL.GameLogic.JoinUser(game.Id, game.Host ?? 0);
+            //BL.GameLogic.JoinUser(game.Id, game.Host ?? 0);
             
             return RedirectToAction("Start", "Game", new { gameId = game.Id, userId = game.Host });
         }
@@ -86,9 +86,27 @@ namespace Game.Controllers
 
             BL.SessionBL.AddOrUpdate(session);
 
-            BL.GameLogic.JoinUser(session.Game ?? 0, session.User ?? 0);
+            //BL.GameLogic.JoinUser(session.Game ?? 0, session.User ?? 0);
 
             return RedirectToAction("Start", "Game", new { gameId = session.Game, userId = session.User });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Join(int gameId ,string selectedShip, string selectedWeapon)
+        {
+            if (selectedShip != "" && selectedWeapon != "")
+            {
+                int userId = BL.UserBL.Get(User.Identity.Name).Id;
+
+                BL.GameLogic.JoinUser(gameId, userId, selectedShip, selectedWeapon);
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [Authorize]
@@ -112,6 +130,19 @@ namespace Game.Controllers
             return View();
         }
 
+        [Authorize]
+        public IActionResult CheckUserInGame(int gameId, int userId)
+        {
+            if (BL.GameLogic.usersInGame.ContainsKey(gameId) && BL.GameLogic.usersInGame[gameId].ContainsKey(userId) && BL.GameLogic.usersInGame[gameId][userId])
+            {
+                return Ok(true);
+            } else
+            {
+                return Ok(false);
+            }
+        }
+
+        [Authorize]
         public IActionResult PressButton(int buttonCode, bool isDown, int gameId, int userId)
         {
             if (isDown)

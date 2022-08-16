@@ -14,8 +14,20 @@ namespace Entity.Ingame
         public int FireCd { get; set; }
         public int FireCount { get; set; }
 
-        public string AmmoType { get; set; }
-        public string Ammo { get; set; }
+        private string ammoType { get; set; }
+        public string AmmoType { get {
+                return ammoType;
+            }
+            set {
+                ammoType = value;
+                switch (ammoType) {
+                    case "bullet": FireCd = 10; break;
+                    case "missile": FireCd = 100; break;
+                    default: FireCd = 1; break;
+                }
+            } 
+        }
+        public AmmoObject Ammo { get; set; }
 
         public double X { get; set; }
         public double Y { get; set; }
@@ -23,8 +35,7 @@ namespace Entity.Ingame
         public Weapon()
         {
             AmmoType = "bullet";
-            FireCd = 10;
-            FireCount = 10;
+            FireCount = 0;
         }
     }
 }

@@ -3,6 +3,7 @@
 }
 <html>
 <head>
+    <title>NoNameGame</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/js/GameClient.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/game.css" /></head>
@@ -42,6 +43,26 @@
         <div class="miniMap">
             <div id="minimap" class="MMvisionRound">
             </div>
+        </div>
+    </div>
+
+    <div class="formBackground">
+        <div class="formWindow" id="selectionShip" style="display:none">
+            <form class="startForm" method="post" action="">
+                <select class="formSelect" name="selectedShip">
+                    <option selected value="battleship-r">Red Battleship</option>
+                    <option value="battleship-p">Purple Battleship</option>
+                    <option value="cruiser-r">Red Cruiser</option>
+                    <option value="cruiser-p">Purple Cruise</option>
+                    <option value="frigate-r">Red Frigate</option>
+                    <option value="frigate-p">Purple Frigate</option>
+                </select>
+                <select class="formSelect" name="selectedWeapon">
+                    <option selected value="missile">Missile Launcher</option>
+                    <option value="bullet">Autocannon</option>
+                </select>
+                <button type="submit">Start</button>
+            </form>
         </div>
     </div>
 </body>

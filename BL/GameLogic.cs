@@ -112,7 +112,7 @@ namespace BL
             allGames[game.Id]["bg"].TryAdd(star.Id, star);
         }
 
-        public static void JoinUser(int gameId, int userId)
+        public static void JoinUser(int gameId, int userId, string ship ="", string weapon = "")
         {
             bool exist = false;
             allButtons[gameId].TryAdd(userId, new ConcurrentDictionary<int, bool>());
@@ -127,23 +127,23 @@ namespace BL
                     exist = true;
                 }
             }
-            if (!exist)
+            if (!exist && ship != "")
             {
                 var userShip = new Entity.Ingame.ShipObject();
                 userShip.XPosition = 150;
                 userShip.YPosition = 150;
                 userShip.UserId = userId;
                 userShip.Name = UserBL.Get(userId).Name;
-                userShip.Class = "battleship-r";
-                if (userId == 1) userShip.Class = "battleship-p";
-                if (userId != 1)
+                userShip.Class = ship;
+                
+                if (weapon != "")
                 {
                     foreach (var w in userShip.Weapons)
                     {
-                        w.AmmoType = "missile";
-                        w.FireCd = 100;
+                        w.AmmoType = weapon;
                     }
                 }
+                
                 allGames[gameId]["ships"].TryAdd(userShip.Id, userShip);
             }
         }

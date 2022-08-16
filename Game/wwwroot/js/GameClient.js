@@ -273,6 +273,7 @@ function refresh() {
         } else if (isAlive) {
             isAlive = false;
             alert("You are dead");
+            document.getElementsByClassName("formBackground")[0].style.display = "block";
         }
     });
 }
@@ -307,6 +308,36 @@ function play() {
     refresh();
 }
 
+function initialize () {
+
+    $.get("https://localhost:44337/Game/GetElements?gameId=" + gameId + "&userId=" + userId, function (data) {
+
+        var arr = JSON.parse(data);
+        console.log(arr);
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].ObjectType == "ship" && arr[i].UserId == userId) {
+                hero = arr[i];
+                break;
+            }
+        }
+        if (hero != null) {
+            for (let i = 0; i < arr.length; i++) {
+                myRender(arr[i]);
+            }
+            objects = arr;
+
+            document.getElementsByClassName("formBackground")[0].style.display = "none";
+
+            let playInterval = setInterval(play, 20);
+
+        } //else {
+            //document.getElementsByClassName("formBackground")[0].style.display = "block";
+        //}
+
+    });
+
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     //console.log(userId);
@@ -335,22 +366,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    $.get("https://localhost:44337/Game/GetElements?gameId=" + gameId + "&userId=" + userId, function (data) {
+    let joinFormBack = document.getElementsByClassName("formBackground")[0];
+    let joinForm = document.getElementById("selectionShip");
+    let selectedShip = joinForm.getElementsByClassName("formSelect")[0];
+    let selectedWeapon = joinForm.getElementsByClassName("formSelect")[1];
 
-        var arr = JSON.parse(data);
-        console.log(arr);
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].ObjectType == "ship" && arr[i].UserId == userId) {
-                hero = arr[i];
-                break;
+    $.get("https://localhost:44337/Game/CheckUserInGame?gameId=" + gameId + "&userId=" + userId, function (data) {
+        if (data == true) {
+            initialize();
+            //if (hero.Id) {
+            //    joinFormBack.style.display = "none";
+            //    //joinForm.style.display = "none";
+            //}
+        }
+    }, false);
+
+    joinForm.addEventListener("submit", function (e) {
+        e.preventDefault;
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:44337/Game/Join",
+            data: {
+                gameId: gameId,
+                selectedShip: selectedShip.value,
+                selectedWeapon: selectedWeapon.value
+            },
+            dataType: "json",
+            success: function () {
+                initialize();
+                joinFormBack.style.display = "none";
+                //joinForm.style.display = "none";
             }
-        }
-        for (let i = 0; i < arr.length; i++) {
-            myRender(arr[i]);
-        }
-        objects = arr;
-    });
+        });
 
-    var playInterval = setInterval(play, 20);
-
+    }, false);
 });

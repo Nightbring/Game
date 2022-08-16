@@ -75,21 +75,43 @@ namespace Entity.Ingame
                         Width = 2 * Radius;
                         Height = 2 * Radius;
 
+                        FullShield = 650;
+                        Shield = FullShield;
+                        FullHP = 400;
+                        HP = FullHP;
+                        FullEnergy = 100;
+                        Energy = FullEnergy;
+                        MaxSpeed = 13;
+                        RSpeed = 5;
+                        Inertion = 0.5;
+
+                        Weapons = new Weapon[4] {
+                            new Weapon() { Radius = 25, AnglePos = 153 },
+                            new Weapon() { Radius = 27, AnglePos = 10 },
+                            new Weapon() { Radius = 27, AnglePos = -10 },
+                            new Weapon() { Radius = 25, AnglePos = -153 }
+                        };
+                        break;
+                    case "cruiser-r":
+                        Radius = 80;
+                        Width = 2 * Radius;
+                        Height = 2 * Radius;
+
                         FullShield = 400;
                         Shield = FullShield;
                         FullHP = 750;
                         HP = FullHP;
                         FullEnergy = 100;
                         Energy = FullEnergy;
-                        MaxSpeed = 15;
+                        MaxSpeed = 11;
                         RSpeed = 5;
                         Inertion = 0.4;
 
-                        Weapons = new Weapon[4] { 
-                            new Weapon() { Radius = 25, AnglePos = 153 }, 
-                            new Weapon() { Radius = 25, AnglePos = -153 }, 
-                            new Weapon() { Radius = 27, AnglePos = 10 }, 
-                            new Weapon() { Radius = 27, AnglePos = -10 } 
+                        Weapons = new Weapon[4] {
+                            new Weapon() { Radius = 56, AnglePos = 155 },
+                            new Weapon() { Radius = 13, AnglePos = 145 },
+                            new Weapon() { Radius = 13, AnglePos = -145 },
+                            new Weapon() { Radius = 56, AnglePos = -155 }
                         };
                         break;
                     case "battleship-p":
