@@ -547,6 +547,8 @@ namespace BL
                 if (target.Shield > 0)
                 {
                     target.Shield -= ammo.Damage;
+                    if (target.Shield < 0)
+                        target.Shield = 0;
                 }
                 else
                 {
