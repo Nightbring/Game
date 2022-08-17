@@ -70,32 +70,32 @@ namespace BL
             allGames[game.Id]["ships"].TryAdd(enemy.Id, enemy);
 
             var star = new Entity.Ingame.DynamicBackground.BackgroundStar();
-            star.Radius = 500;
+            star.Radius = 2000;
             star.Layer = 4;
-            star.Planets = new Entity.Ingame.DynamicBackground.BackgroundPlanet[2]
+            star.Planets = new Entity.Ingame.DynamicBackground.BackgroundPlanet[3]
             {
                 new Entity.Ingame.DynamicBackground.BackgroundPlanet()
                 {
-                    Radius = 100,
+                    Radius = 1000,
                     Layer = 4,
-                    OrbitalRadius = 6000,
+                    OrbitalRadius = 9000,
                     OrbitalSpeed = 2,
                     Angle = 0,
                     Moons = new Entity.Ingame.DynamicBackground.BackgroundMoon[2]
                     {
                         new Entity.Ingame.DynamicBackground.BackgroundMoon()
                         {
-                            Radius = 15,
+                            Radius = 120,
                             Layer = 4,
-                            OrbitalRadius = 600,
+                            OrbitalRadius = 1400,
                             OrbitalSpeed = -2,
                             Angle = 0
                         },
                         new Entity.Ingame.DynamicBackground.BackgroundMoon()
                         {
-                            Radius = 10,
+                            Radius = 80,
                             Layer = 4,
-                            OrbitalRadius = 1000,
+                            OrbitalRadius = 2000,
                             OrbitalSpeed = -2,
                             Angle = 0
                         }
@@ -103,10 +103,17 @@ namespace BL
                 },
                 new Entity.Ingame.DynamicBackground.BackgroundPlanet()
                 {
-                    Radius = 50,
+                    Radius = 600,
                     Layer = 4,
-                    OrbitalRadius = 3300,
+                    OrbitalRadius = 4500,
                     OrbitalSpeed = -3,
+                },
+                new Entity.Ingame.DynamicBackground.BackgroundPlanet()
+                {
+                    Radius = 500,
+                    Layer = 4,
+                    OrbitalRadius = 15000,
+                    OrbitalSpeed = 2,
                 }
             };
             allGames[game.Id]["bg"].TryAdd(star.Id, star);

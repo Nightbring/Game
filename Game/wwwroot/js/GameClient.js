@@ -17,6 +17,7 @@ var isAlive = true;
 
 function myRender(serverObject) {
     if (serverObject.ObjectType == "ship") {
+        //Ship and visual
         let d = document.createElement('div');
         let v = document.createElement('div');
         d.style.width = serverObject.Width + "px";
@@ -42,7 +43,7 @@ function myRender(serverObject) {
         let wa = serverObject.Weapons;
 
         d.appendChild(v);
-
+        //Weapons
         for (let k = 0; k < wa.length; k++) {
             let w = document.createElement('div');
             w.style.position = "absolute";
@@ -63,15 +64,15 @@ function myRender(serverObject) {
         d.appendChild(t);
 
         document.body.appendChild(d);
-
+        //Minimap
         if (serverObject != hero) {
             let mm = document.createElement('div');
             mm.id = "mm" + serverObject.Id;
             mm.className = "MMShip"
             mm.style.height = "4px";
             mm.style.width = "4px";
-            mm.style.left = ((serverObject.XPosition - hero.XPosition - 3) / 20 + 100) + "px";
-            mm.style.bottom = ((serverObject.YPosition - hero.YPosition - 3) / 20 + 100) + "px";
+            mm.style.left = ((serverObject.XPosition - hero.XPosition - 3) / 40 + 100) + "px";
+            mm.style.bottom = ((serverObject.YPosition - hero.YPosition - 3) / 40 + 100) + "px";
 
             document.getElementById("minimap").appendChild(mm);
         } else {
@@ -84,11 +85,11 @@ function myRender(serverObject) {
 
     } else if (serverObject.ObjectType == "bgobject") {
         let d = document.createElement('div');
-        d.style.width = serverObject.Radius * 2 + "px";
-        d.style.height = serverObject.Radius * 2 + "px";
+        d.style.width = ((serverObject.Radius * 2) / serverObject.Layer) + "px";
+        d.style.height = ((serverObject.Radius * 2) / serverObject.Layer) + "px";
 
-        d.style.bottom = (parseInt(window.innerHeight) / 2 + ((serverObject.YPosition - hero.YPosition) / serverObject.Layer) - serverObject.Radius) + "px";
-        d.style.left = (parseInt(window.innerWidth) / 2 + ((serverObject.XPosition - hero.XPosition) / serverObject.Layer) - serverObject.Radius) + "px";
+        d.style.bottom = (parseInt(window.innerHeight) / 2 + ((serverObject.YPosition - hero.YPosition) / serverObject.Layer) - (serverObject.Radius / serverObject.Layer)) + "px";
+        d.style.left = (parseInt(window.innerWidth) / 2 + ((serverObject.XPosition - hero.XPosition) / serverObject.Layer) - (serverObject.Radius / serverObject.Layer)) + "px";
 
         d.id = serverObject.Id;
         d.className = serverObject.ObjectType + " " + serverObject.Class;
@@ -97,11 +98,11 @@ function myRender(serverObject) {
         if (serverObject.Class == "star") {
             serverObject.Planets.forEach(function (planet) {
                 let p = document.createElement('div');
-                p.style.width = planet.Radius * 2 + "px";
-                p.style.height = planet.Radius * 2 + "px";
+                p.style.width = planet.Radius * 2 / planet.Layer + "px";
+                p.style.height = planet.Radius * 2 / planet.Layer + "px";
 
-                p.style.bottom = (parseInt(window.innerHeight) / 2 + ((planet.YPosition - hero.YPosition) / planet.Layer) - planet.Radius) + "px";
-                p.style.left = (parseInt(window.innerWidth) / 2 + ((planet.XPosition - hero.XPosition) / planet.Layer) - planet.Radius) + "px";
+                p.style.bottom = (parseInt(window.innerHeight) / 2 + ((planet.YPosition - hero.YPosition) / planet.Layer) - planet.Radius / planet.Layer) + "px";
+                p.style.left = (parseInt(window.innerWidth) / 2 + ((planet.XPosition - hero.XPosition) / planet.Layer) - planet.Radius / planet.Layer) + "px";
 
                 p.id = planet.Id;
                 p.className = planet.ObjectType + " " + planet.Class;
@@ -109,11 +110,11 @@ function myRender(serverObject) {
 
                 planet.Moons.forEach(function (moon) {
                     let m = document.createElement('div');
-                    m.style.width = moon.Radius * 2 + "px";
-                    m.style.height = moon.Radius * 2 + "px";
+                    m.style.width = moon.Radius * 2 / moon.Layer + "px";
+                    m.style.height = moon.Radius * 2 / moon.Layer + "px";
 
-                    m.style.bottom = (parseInt(window.innerHeight) / 2 + ((moon.YPosition - hero.YPosition) / moon.Layer) - moon.Radius) + "px";
-                    m.style.left = (parseInt(window.innerWidth) / 2 + ((moon.XPosition - hero.XPosition) / moon.Layer) - moon.Radius) + "px";
+                    m.style.bottom = (parseInt(window.innerHeight) / 2 + ((moon.YPosition - hero.YPosition) / moon.Layer) - moon.Radius / moon.Layer) + "px";
+                    m.style.left = (parseInt(window.innerWidth) / 2 + ((moon.XPosition - hero.XPosition) / moon.Layer) - moon.Radius / moon.Layer) + "px";
 
                     m.id = moon.Id;
                     m.className = moon.ObjectType + " " + moon.Class;
@@ -168,21 +169,21 @@ function refresh() {
                             object.style.webkitTransform = 'rotate(' + a + 'deg)';
                         }
                     } else {
-                        object.style.bottom = (parseInt(window.innerHeight) / 2 + ((arr[i].YPosition - hero.YPosition) / arr[i].Layer) - arr[i].Radius) + "px";
-                        object.style.left = (parseInt(window.innerWidth) / 2 + ((arr[i].XPosition - hero.XPosition) / arr[i].Layer) - arr[i].Radius) + "px";
+                        object.style.bottom = (parseInt(window.innerHeight) / 2 + ((arr[i].YPosition - hero.YPosition) / arr[i].Layer) - arr[i].Radius / arr[i].Layer) + "px";
+                        object.style.left = (parseInt(window.innerWidth) / 2 + ((arr[i].XPosition - hero.XPosition) / arr[i].Layer) - arr[i].Radius / arr[i].Layer) + "px";
 
                         if (arr[i].Class == "star") {
                             arr[i].Planets.forEach(function (planet) {
                                 let p = document.getElementById(planet.Id);
 
-                                p.style.left = (parseInt(window.innerWidth) / 2 + ((planet.XPosition - hero.XPosition) / planet.Layer) - planet.Radius) + "px";
-                                p.style.bottom = (parseInt(window.innerHeight) / 2 + ((planet.YPosition - hero.YPosition) / planet.Layer) - planet.Radius) + "px";
+                                p.style.left = (parseInt(window.innerWidth) / 2 + ((planet.XPosition - hero.XPosition) / planet.Layer) - planet.Radius / planet.Layer) + "px";
+                                p.style.bottom = (parseInt(window.innerHeight) / 2 + ((planet.YPosition - hero.YPosition) / planet.Layer) - planet.Radius / planet.Layer) + "px";
 
                                 planet.Moons.forEach(function (moon) {
                                     let m = document.getElementById(moon.Id);
 
-                                    m.style.left = (parseInt(window.innerWidth) / 2 + ((moon.XPosition - hero.XPosition) / moon.Layer) - moon.Radius) + "px";
-                                    m.style.bottom = (parseInt(window.innerHeight) / 2 + ((moon.YPosition - hero.YPosition) / moon.Layer) - moon.Radius) + "px";
+                                    m.style.left = (parseInt(window.innerWidth) / 2 + ((moon.XPosition - hero.XPosition) / moon.Layer) - moon.Radius / moon.Layer) + "px";
+                                    m.style.bottom = (parseInt(window.innerHeight) / 2 + ((moon.YPosition - hero.YPosition) / moon.Layer) - moon.Radius / moon.Layer) + "px";
                                 });
                             });
                         }
