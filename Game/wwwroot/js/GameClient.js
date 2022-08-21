@@ -48,7 +48,7 @@ function myRender(serverObject) {
             let w = document.createElement('div');
             w.style.position = "absolute";
             w.style.borderRadius = "50%";
-            w.style.backgroundColor = "magenta";
+            w.style.backgroundColor = "black";
             w.style.left = wa[k].X - 3 + serverObject.Width / 2;
             w.style.bottom = wa[k].Y - 3 + serverObject.Height / 2;
             w.style.width = "6px";
