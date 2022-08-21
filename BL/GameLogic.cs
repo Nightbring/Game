@@ -284,11 +284,12 @@ namespace BL
                                 if (GameLogic.allFire[gameId][userId].Item1)
                                 {
                                     //Fire
-                                    w.FireCount = 0;
                                     if (w.AmmoType == "missile")
                                     {
                                         if (ship.LockedTarget != "")
                                         {
+                                            w.FireCount = 0;
+
                                             var missile = new Entity.Ingame.Ammo.Missile();
                                             var ammo = (Entity.Ingame.AmmoObject)missile;
                                             ammo.Shooter = ship;
@@ -309,6 +310,8 @@ namespace BL
                                     }
                                     else if (w.AmmoType == "bullet")
                                     {
+                                        w.FireCount = 0;
+
                                         var ammo = new Entity.Ingame.AmmoObject();
                                         ammo.Shooter = ship;
                                         ammo.MyWeapon = j; // Array.IndexOf(ship.Weapons, w);
